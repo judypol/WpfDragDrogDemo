@@ -1,0 +1,52 @@
+﻿<Window x:Class="DragDropExample.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DragDropExample"
+        xmlns:dd="urn:gong-wpf-dragdrop"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Window.Resources>
+        <Style TargetType="{x:Type ListBox}">
+            <!-- Swap out the default items panel with a WrapPanel so that
+           the images will be arranged with a different layout. -->
+            <Setter Property="ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <!-- Set this attached property to 'Disabled' so that the 
+           ScrollViewer in the ListBox will never show a horizontal 
+           scrollbar, and the WrapPanel it contains will be constrained 
+           to the width of the ScrollViewer's viewable surface. -->
+            <Setter 
+        Property="ScrollViewer.HorizontalScrollBarVisibility" 
+        Value="Disabled" 
+        />
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <ListBox x:Name="list" Grid.Row="0" HorizontalAlignment="Left" Margin="2"
+                 dd:DragDrop.DropHandler="{Binding}"
+                 dd:DragDrop.DropTargetAdornerBrush="Coral"
+                dd:DragDrop.IsDragSource="True"
+                dd:DragDrop.IsDropTarget="True" >
+            <ListBoxItem>
+                <local:LinkCardCtrl x:Name="aaa"/>
+            </ListBoxItem>
+            <ListBoxItem>
+                <local:LinkCardCtrl x:Name="bbb"/>
+            </ListBoxItem>
+            <ListBoxItem>
+                <local:LinkCardCtrl x:Name="cccc"/>
+            </ListBoxItem>
+            <ListBoxItem Background="Black">
+                <local:LinkCardCtrl Background="Bisque" x:Name="dddd"/>
+            </ListBoxItem>
+        </ListBox>
+    </Grid>
+</Window>
